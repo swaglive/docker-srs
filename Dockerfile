@@ -30,9 +30,6 @@ RUN         apt-get update && \
 
 WORKDIR     srs-${version}/trunk
 
-#             # HACK: Increase RTMP URL length to 256bytes
-# RUN         sed -i 's|char url_sz\[128\];|char url_sz\[256\];|g' src/srt/srt_to_rtmp.cpp
-
 RUN         ./configure \
                 --jobs=${jobs} \
                 --srt=on \
@@ -50,9 +47,6 @@ RUN         ./configure \
 ###
 
 FROM        ${base}
-
-# ENV         LIBRARY_PATH=/usr/local/lib64
-# ENV         LD_LIBRARY_PATH=/usr/local/lib64
 
 WORKDIR     /usr/local/srs
 
