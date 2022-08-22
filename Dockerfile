@@ -1,4 +1,4 @@
-ARG         base=centos:8
+ARG         base=ubuntu:20.04
 
 ###
 
