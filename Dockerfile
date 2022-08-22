@@ -51,7 +51,7 @@ FROM        ${base}
 WORKDIR     /usr/local/srs
 
 ENTRYPOINT  ["./objs/srs"]
-CMD         ["-c", "./conf/docker.conf"]
+CMD         ["-c", "conf/docker.conf"]
 
 EXPOSE      1935/tcp 1985/tcp 8080/tcp 8000/udp 10080/udp
 
