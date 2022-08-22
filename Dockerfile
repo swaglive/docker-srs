@@ -1,4 +1,4 @@
-ARG         base=ubuntu:20.04
+ARG         base=ubuntu:22.04
 
 ###
 
@@ -10,6 +10,8 @@ ARG         jobs=8
 ARG         MAKEFLAGS=-j${jobs}
 
 ENV         MAKEFLAGS=${MAKEFLAGS}
+ENV         DEBIAN_FRONTEND=noninteractive
+ENV         TZ=Etc/UTC
 
 RUN         apt-get update && \
             apt-get install -y \
