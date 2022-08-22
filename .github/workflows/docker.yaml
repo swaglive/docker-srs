@@ -15,7 +15,10 @@ jobs:
       matrix:
         version:
         - "5.0.41"
-        - "4.0-r1"
+        - "4.0.0"
+        include:
+        - version: "4.0.0"
+          tag: "4.0-r1"
 
     steps:
     - name: Checkout
@@ -67,7 +70,7 @@ jobs:
       with:
         context: .
         build-args: |
-          version=${{ matrix.version }}
+          version=${{ matrix.tag || matrix.version }}
         push: ${{ !steps.config.outputs.skip-push-to-registry }}
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
