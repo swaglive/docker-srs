@@ -71,6 +71,7 @@ jobs:
         context: .
         build-args: |
           version=${{ matrix.tag || matrix.version }}
+          jobs=${{ env.NPROC }}
         push: ${{ !steps.config.outputs.skip-push-to-registry }}
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
