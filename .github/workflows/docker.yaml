@@ -14,11 +14,11 @@ jobs:
       fail-fast: false
       matrix:
         version:
-        - "5.0.41"
+        - "5.0.63"
         - "4.0.0"
         include:
         - version: "4.0.0"
-          tag: "4.0-r1"
+          tag: "4.0-r3"
 
     steps:
     - name: Checkout
@@ -39,14 +39,12 @@ jobs:
 
     - name: Setup - Docker Hub
       uses: docker/login-action@v2
-      if: ${{ !steps.config.outputs.skip-push-to-registry }}
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Setup - Github Container Registry
       uses: docker/login-action@v2
-      if: ${{ !steps.config.outputs.skip-push-to-registry }}
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
@@ -72,7 +70,7 @@ jobs:
         build-args: |
           version=${{ matrix.tag || matrix.version }}
           jobs=${{ env.NPROC }}
-        push: ${{ !steps.config.outputs.skip-push-to-registry }}
+        push: true
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
         cache-from: type=gha
