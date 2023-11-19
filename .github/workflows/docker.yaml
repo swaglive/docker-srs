@@ -16,7 +16,8 @@ jobs:
         version:
         - "5.0.195"
         - "6.0.85"
-        platforms: 'linux/amd64,linux/arm64'
+        platforms:
+        - "linux/amd64,linux/arm64"
 
     steps:
     - name: Checkout
