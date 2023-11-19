@@ -14,11 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         version:
-        - "5.0.185"
-        - "4.0.0"
-        include:
-        - version: "4.0.0"
-          tag: "4.0-r3"
+        - "5.0.195"
+        - "6.0.85"
 
     steps:
     - name: Checkout
@@ -57,10 +54,8 @@ jobs:
         images: |-
           ${{ steps.config.outputs.repo-owner }}/${{ steps.config.outputs.repo-name }}
           ghcr.io/${{ steps.config.outputs.repo-owner }}/${{ steps.config.outputs.repo-name }}
-        flavor: |-
-          latest=${{ !!matrix.latest }}
         tags: |-
-          type=semver,pattern={{major}}.{{minor}},value=${{ matrix.version }}
+          type=semver,pattern={{major}}.{{minor}}.{{patch}},value=${{ matrix.version }}
 
     - name: Build
       uses: docker/build-push-action@v5
@@ -68,8 +63,7 @@ jobs:
       with:
         context: .
         build-args: |
-          version=${{ matrix.tag || matrix.version }}
-          jobs=${{ env.NPROC }}
+          version=${{ matrix.version }}
         push: true
         labels: ${{ steps.meta.outputs.labels }}
         tags: ${{ steps.meta.outputs.tags }}
