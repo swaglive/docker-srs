@@ -15,7 +15,7 @@ jobs:
       matrix:
         version:
         - "5.0.195"
-        - "6.0.85"
+        - "6.0.101"
         platforms:
         - "linux/amd64,linux/arm64"
 
